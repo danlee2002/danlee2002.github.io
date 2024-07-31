@@ -21,7 +21,7 @@
 title: rademacher 
 email: gogo.daniellee@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
-  another blog on computational theory.
+  yapping about computational theory.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: bip4rtite

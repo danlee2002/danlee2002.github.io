@@ -4,3 +4,7 @@
 
 layout: home
 ---
+<div style = "text-align: center;padding-top: 20 px">
+<h1>Rademacher</h1>
+All things related to computational theory and ML.
+</div>
