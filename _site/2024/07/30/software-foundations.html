@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Software Foundations Day 1 | rademacher</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="Software Foundations Day 1" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Introduction In this blog, I shall began documenting my progress through UPenn’s CIS: Software Foundations Course, a course dedicated on providing introduction to the mathematical underpinning of what makes up reliable software. Before we begin we need to first set up COQ, the language we will be using to verify software. The easiest way to install COQ is to install via opam, ocaml’s package manager. For the linux operating system we can simply run the following command:" />
+<meta property="og:description" content="Introduction In this blog, I shall began documenting my progress through UPenn’s CIS: Software Foundations Course, a course dedicated on providing introduction to the mathematical underpinning of what makes up reliable software. Before we begin we need to first set up COQ, the language we will be using to verify software. The easiest way to install COQ is to install via opam, ocaml’s package manager. For the linux operating system we can simply run the following command:" />
+<link rel="canonical" href="http://localhost:4000/2024/07/30/software-foundations.html" />
+<meta property="og:url" content="http://localhost:4000/2024/07/30/software-foundations.html" />
+<meta property="og:site_name" content="rademacher" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-07-30T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Software Foundations Day 1" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-07-30T00:00:00-04:00","datePublished":"2024-07-30T00:00:00-04:00","description":"Introduction In this blog, I shall began documenting my progress through UPenn’s CIS: Software Foundations Course, a course dedicated on providing introduction to the mathematical underpinning of what makes up reliable software. Before we begin we need to first set up COQ, the language we will be using to verify software. The easiest way to install COQ is to install via opam, ocaml’s package manager. For the linux operating system we can simply run the following command:","headline":"Software Foundations Day 1","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2024/07/30/software-foundations.html"},"url":"http://localhost:4000/2024/07/30/software-foundations.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="rademacher" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">rademacher</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Software Foundations Day 1</h1>
+  </header>
+
+  <div class="post-content">
+    <h1>  Introduction</h1>
+<p>In this blog, I shall began documenting my progress through <a href="https://www.seas.upenn.edu/~cis5000/current/index.html">UPenn’s CIS: Software Foundations Course</a>, a course dedicated on providing introduction to the mathematical underpinning of what makes up reliable software. Before we begin we need to first set up COQ, the language we will be using to verify software. The easiest way to install COQ is to install via opam, ocaml’s package manager. For the linux operating system we can simply run the following command:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bash <span class="nt">-c</span> <span class="s2">"sh &lt;(curl -fsSL https://raw.githubusercontent.com/ocaml/opam/master/shell/install.sh)
+</span></code></pre></div></div>
+<p>For mac users, we can set up this via hombrew:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew <span class="nb">install </span>opam
+</code></pre></div></div>
+<p>Moreover, for mac users in order to utilize COQ one needs to ensure they have gnu patch installed so if one doesn’t already have gpatch installed also run the following command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew <span class="nb">install </span>gpatch
+</code></pre></div></div>
+<p>Once installation finishes we can verify if opam installed properly using the following command <code class="language-plaintext highlighter-rouge">opam --version</code>.
+Now to finalize our setup we need to setup coq and our ide. To do this, let’s first initialize an opam switch <code class="language-plaintext highlighter-rouge">opam switch create coq [ocaml version]</code>. 
+With our switch initalized we can now install COQ as needed <code class="language-plaintext highlighter-rouge">opam install coq</code> and verify installation via <code class="language-plaintext highlighter-rouge">coqc --version</code>. 
+The final step is to choose an ide of one’s choice, there are many different options such as Coqtail, Proof General, and vscoq for my use case I shall be personally using <a href="https://github.com/coq-community/vscoq">vscoq</a>.</p>
+<h1> Getting Started </h1>
+<p>With our initial setup out of the way, we can begin looking into the basic structures of Coq:</p>
+<h3>Inductive Types</h3>
+<p>In coq, we can define inductive types utilizing the following notation:</p>
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">Inductive</span><span class="w"> </span><span class="no">typename</span><span class="p">:</span><span class="w"> </span><span class="kr">Type</span><span class="p">:=</span><span class="w">
+</span><span class="p">|</span><span class="no">value1</span><span class="w">
+</span><span class="p">|</span><span class="no">value2</span><span class="w">
+</span><span class="p">|</span><span class="no">value3</span><span class="pi">.</span><span class="w">
+</span></code></pre></div></div>
+<p>Now in a similar fashion we can also define functions on a type via the following syntax:</p>
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">Definition</span><span class="w"> </span><span class="p">(</span><span class="no">val1</span><span class="p">:</span><span class="no">type</span><span class="p">):</span><span class="w"> </span><span class="no">type</span><span class="w"> </span><span class="p">:=</span><span class="w">
+    </span><span class="kr">match</span><span class="w"> </span><span class="no">val1</span><span class="w"> </span><span class="kp">with</span><span class="w">
+    </span><span class="p">|</span><span class="no">val1</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="no">output1</span><span class="w">
+    </span><span class="p">|</span><span class="no">val2</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="no">output2</span><span class="pi">.</span><span class="w">
+
+</span></code></pre></div></div>
+<p>To call a function we use the <code class="language-plaintext highlighter-rouge">Computer operator</code>:</p>
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">Compute</span><span class="w"> </span><span class="p">(</span><span class="no">func</span><span class="w"> </span><span class="no">val</span><span class="p">)</span><span class="pi">.</span><span class="w">
+    
+</span></code></pre></div></div>
+<p>As a more concrete sample here is a following definition of a boolean class:</p>
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">Inductive</span><span class="w"> </span><span class="no">bool</span><span class="p">:</span><span class="w"> </span><span class="kr">Type</span><span class="p">:=</span><span class="w">
+</span><span class="p">|</span><span class="no">true</span><span class="w">
+</span><span class="p">|</span><span class="no">false</span><span class="pi">.</span><span class="w">
+
+</span><span class="k">Definition</span><span class="w"> </span><span class="no">negb</span><span class="p">(</span><span class="no">b1</span><span class="p">:</span><span class="w"> </span><span class="no">bool</span><span class="p">):</span><span class="w"> </span><span class="no">bool</span><span class="w"> </span><span class="p">:=</span><span class="w">
+	</span><span class="kr">match</span><span class="w"> </span><span class="no">b1</span><span class="w"> </span><span class="kp">with</span><span class="w"> 
+	</span><span class="p">|</span><span class="no">true</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="no">false</span><span class="w">
+	</span><span class="p">|</span><span class="no">false</span><span class="w"> </span><span class="p">=&gt;</span><span class="w">  </span><span class="no">true</span><span class="w">
+	</span><span class="kr">end</span><span class="pi">.</span><span class="w">
+</span><span class="k">Definition</span><span class="w"> </span><span class="no">andb</span><span class="p">(</span><span class="no">b1</span><span class="p">:</span><span class="w"> </span><span class="no">bool</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="no">b2</span><span class="p">:</span><span class="w"> </span><span class="no">bool</span><span class="p">):</span><span class="w"> </span><span class="no">bool</span><span class="w"> </span><span class="p">:=</span><span class="w"> 
+	</span><span class="kr">match</span><span class="w"> </span><span class="no">b1</span><span class="w"> </span><span class="kp">with</span><span class="w">
+		</span><span class="p">|</span><span class="w"> </span><span class="no">true</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="no">b2</span><span class="w">
+		</span><span class="p">|</span><span class="w"> </span><span class="no">false</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="no">false</span><span class="w">
+	</span><span class="kr">end</span><span class="pi">.</span><span class="w">
+</span><span class="k">Definition</span><span class="w"> </span><span class="no">orb</span><span class="p">(</span><span class="no">b1</span><span class="p">:</span><span class="w"> </span><span class="no">bool</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="no">b2</span><span class="p">:</span><span class="w"> </span><span class="no">bool</span><span class="p">):</span><span class="w"> </span><span class="no">bool</span><span class="w"> </span><span class="p">:=</span><span class="w"> 
+	</span><span class="kr">match</span><span class="w"> </span><span class="no">b1</span><span class="w"> </span><span class="kp">with</span><span class="w">
+		</span><span class="p">|</span><span class="w"> </span><span class="no">true</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="no">true</span><span class="w">
+		</span><span class="p">|</span><span class="w"> </span><span class="no">false</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="no">b2</span><span class="w">
+	</span><span class="kr">end</span><span class="pi">.</span><span class="w">
+</span><span class="c">(**we can perform operations on the function above using the following notation**)</span><span class="w">
+</span><span class="k">Compute</span><span class="w"> </span><span class="p">(</span><span class="no">orb</span><span class="w"> </span><span class="no">false</span><span class="w"> </span><span class="no">false</span><span class="p">)</span><span class="pi">.</span><span class="w">
+</span><span class="c">(**we can also simplify notation with the notation construct**)</span><span class="w">
+</span><span class="k">Notation</span><span class="w"> </span><span class="s2">"x &amp;&amp; y"</span><span class="w"> </span><span class="p">:=</span><span class="w"> </span><span class="p">(</span><span class="no">andb</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">y</span><span class="p">)</span><span class="pi">.</span><span class="w">
+</span><span class="k">Notation</span><span class="w"> </span><span class="s2">"x || y"</span><span class="w"> </span><span class="p">:=</span><span class="w"> </span><span class="p">(</span><span class="no">orb</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="no">y</span><span class="p">)</span><span class="pi">.</span><span class="w">
+</span></code></pre></div></div>
+<p>We can also perform assertions and proves using the following notation:</p>
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">Example</span><span class="w"> </span><span class="no">test_orb5</span><span class="p">:</span><span class="w">  </span><span class="no">false</span><span class="w"> </span><span class="p">||</span><span class="w"> </span><span class="no">false</span><span class="w"> </span><span class="p">||</span><span class="w"> </span><span class="no">true</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span><span class="pi">.</span><span class="w">
+</span><span class="k">Proof</span><span class="pi">.</span><span class="w"> </span><span class="kp">simpl</span><span class="pi">.</span><span class="w"> </span><span class="ne">reflexivity</span><span class="pi">.</span><span class="w"> </span><span class="k">Qed</span><span class="pi">.</span><span class="w">
+</span></code></pre></div></div>
+<h3>Basics Solution</h3>
+<div class="language-coq highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">(** **** Exercise: 1 star, standard (nandb)
+
+    The [Admitted] command can be used as a placeholder for an
+    incomplete proof.  We use it in exercises to indicate the parts
+    that we're leaving for you -- i.e., your job is to replace
+    [Admitted]s with real proofs.
+
+    Remove "[Admitted.]" and complete the definition of the following
+    function; then make sure that the [Example] assertions below can
+    each be verified by Coq.  (I.e., fill in each proof, following the
+    model of the [orb] tests above, and make sure Coq accepts it.) The
+    function should return [true] if either or both of its inputs are
+    [false].
+
+    Hint: if [simpl] will not simplify the goal in your proof, it's
+    probably because you defined [nandb] without using a [match]
+    expression. Try a different definition of [nandb], or just
+    skip over [simpl] and go directly to [reflexivity]. We'll
+    explain this phenomenon later in the chapter. *)</span><span class="w">
+
+</span><span class="k">Definition</span><span class="w"> </span><span class="no">nandb</span><span class="w"> </span><span class="p">(</span><span class="no">b1</span><span class="p">:</span><span class="no">bool</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="no">b2</span><span class="p">:</span><span class="no">bool</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="no">bool</span><span class="w"> </span><span class="p">:=</span><span class="w">
+  </span><span class="kr">match</span><span class="w"> </span><span class="no">b1</span><span class="w"> </span><span class="kp">with</span><span class="w">
+  </span><span class="p">|</span><span class="no">true</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="kr">if</span><span class="w"> </span><span class="no">b2</span><span class="w"> </span><span class="kr">then</span><span class="w"> </span><span class="no">false</span><span class="w"> </span><span class="kr">else</span><span class="w"> </span><span class="no">true</span><span class="w">
+  </span><span class="p">|</span><span class="no">false</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="no">true</span><span class="w"> 
+  </span><span class="kr">end</span><span class="pi">.</span><span class="w">
+
+</span><span class="k">Example</span><span class="w"> </span><span class="no">test_nandb1</span><span class="p">:</span><span class="w">               </span><span class="p">(</span><span class="no">nandb</span><span class="w"> </span><span class="no">true</span><span class="w"> </span><span class="no">false</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span><span class="pi">.</span><span class="w">
+</span><span class="k">Proof</span><span class="pi">.</span><span class="w"> </span><span class="kp">simpl</span><span class="pi">.</span><span class="w"> </span><span class="ne">reflexivity</span><span class="pi">.</span><span class="w"> </span><span class="k">Qed</span><span class="pi">.</span><span class="w">
+</span><span class="k">Example</span><span class="w"> </span><span class="no">test_nandb2</span><span class="p">:</span><span class="w">               </span><span class="p">(</span><span class="no">nandb</span><span class="w"> </span><span class="no">false</span><span class="w"> </span><span class="no">false</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span><span class="pi">.</span><span class="w">
+</span><span class="k">Proof</span><span class="pi">.</span><span class="w"> </span><span class="kp">simpl</span><span class="pi">.</span><span class="w"> </span><span class="ne">reflexivity</span><span class="pi">.</span><span class="w"> </span><span class="k">Qed</span><span class="pi">.</span><span class="w">
+</span><span class="k">Example</span><span class="w"> </span><span class="no">test_nandb3</span><span class="p">:</span><span class="w">               </span><span class="p">(</span><span class="no">nandb</span><span class="w"> </span><span class="no">false</span><span class="w"> </span><span class="no">true</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span><span class="pi">.</span><span class="w">
+</span><span class="k">Proof</span><span class="pi">.</span><span class="w"> </span><span class="kp">simpl</span><span class="pi">.</span><span class="w"> </span><span class="ne">reflexivity</span><span class="pi">.</span><span class="w"> </span><span class="k">Qed</span><span class="pi">.</span><span class="w">
+</span><span class="k">Example</span><span class="w"> </span><span class="no">test_nandb4</span><span class="p">:</span><span class="w">               </span><span class="p">(</span><span class="no">nandb</span><span class="w"> </span><span class="no">true</span><span class="w"> </span><span class="no">true</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">false</span><span class="pi">.</span><span class="w">
+</span><span class="k">Proof</span><span class="pi">.</span><span class="w"> </span><span class="kp">simpl</span><span class="pi">.</span><span class="w"> </span><span class="ne">reflexivity</span><span class="pi">.</span><span class="w"> </span><span class="k">Qed</span><span class="pi">.</span><span class="w">
+</span><span class="c">(** [] *)</span><span class="w">
+</span></code></pre></div></div>
+
+
+  </div>
+
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">rademacher</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">rademacher</li><li><a class="u-email" href="mailto:gogo.daniellee@gmail.com">gogo.daniellee@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/danlee2002"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">danlee2002</span></a></li><li><a href="https://www.twitter.com/bip4rtite"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">bip4rtite</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>another blog on computational theory.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

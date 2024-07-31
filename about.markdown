@@ -3,16 +3,13 @@ layout: page
 title: About
 permalink: /about/
 ---
+<html>
+<h2>Hello my name is Daniel 👋 </h2>
+<p>
+  <li> Recent CS Graduate from <a href = "https://www.gatech.edu"><u>Georgia Tech</u> </a></li>
+  <li> Interested in Computational Theory and Machine Learning</li>
+  <li> Currently learning Rust and delving into formal verification</li>
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/)
+  The primary purpose of this blog is to document my progress learning various paradigm within the domain of computing and share my acquired knowledge with the world. </p>
 
-You can find the source code for Minima at GitHub:
-[jekyll][jekyll-organization] /
-[minima](https://github.com/jekyll/minima)
-
-You can find the source code for Jekyll at GitHub:
-[jekyll][jekyll-organization] /
-[jekyll](https://github.com/jekyll/jekyll)
-
-
-[jekyll-organization]: https://github.com/jekyll
+</html>
